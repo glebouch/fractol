@@ -12,15 +12,18 @@
 
 #include "fractol.h"
 
-/*int		ft_mouse(int x, int y, t_s *t)
+int		ft_mouse(t_s *t, int x, int y)
 {
-	t->cdt_r = (x - WIDTH/2) / (WIDTH/2);
-	t->cdt_i = (y - WIDTH/2) / (WIDTH/2);
+	ft_putstr("passe par mouse\n");
+	t->cdt_r = (x - 400) / (400);
+	t->cdt_i = (y - 400) / (400);
+	ft_putstr("passe par mouse 2\n");
 	ft_julia(t);
+	ft_putstr("passe par mouse 3\n");
 	return (0);
 }
 
-void	ft_init_julia(t_s *t)
+/*void	ft_init_julia(t_s *t)
 {
 //	ft_putstr("coucou ici ft_init_julia\n");
 	t->cdt_r = -0.85;
@@ -69,7 +72,7 @@ void	ft_julia(t_s *t)
 	}
 }*/
 
-int		ft_mouse(t_s *t, int x, int y)
+/*int		ft_mouse(t_s *t, int x, int y)
 {
 	if (t->fract == 1)
 	{
@@ -79,12 +82,12 @@ int		ft_mouse(t_s *t, int x, int y)
 		ft_julia(t);
 	}
 	return (0);
-}
+}*/
 
 void	ft_init_julia(t_s *t)
 {
-//	t->cdt_r = 0.285;
-//	t->cdt_i = 0.01;
+	t->cdt_r = 0.285;
+	t->cdt_i = 0.01;
 	ft_julia(t);
 }
 
@@ -104,7 +107,7 @@ void	ft_calcul_julia(int x, int y, t_s *t)
 		i++;
 	}
 	ft_get_color(t, x, y, i);
-	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
+//	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
 }
 
 void	ft_julia(t_s *t)

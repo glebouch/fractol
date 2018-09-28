@@ -14,11 +14,14 @@
 
 void		ft_change_fract(t_s *t, int KC)
 {
+	ft_putstr("passe par change fract\n");
+	t->o = 0;
+	t->v = 0;
 	if (KC == KEYJ || t->fract == 1)
 	{
 		t->fract = 1;
 		t->zoom = 200;
-		t->var_zoom = 20;
+		t->var_zoom = 10;
 	}
 	if (KC == KEYM || t->fract == 2)
 	{
@@ -31,7 +34,7 @@ void		ft_change_fract(t_s *t, int KC)
 int		ft_key(int keycode, t_s *t)
 {
 	printf("%d\n", keycode);
-	printf("%e\n", t->zoom);
+	printf("%f\n", t->zoom);
 	if (KC == EXIT)
 		exit(1);
 	if (KC == KEYUP || KC == KEYDOWN)
@@ -56,11 +59,12 @@ int		ft_key(int keycode, t_s *t)
 
 int		ft_quit(t_s *t)
 {
-	free(t);
+	(void)t;
+//	free(t);
 	exit(1);
 }
 
-/*int		ft_fractol2(t_s *t)
+int		ft_fractol2(t_s *t)
 {
 //	ft_putstr("coucouc on est dans fractol2\n");
 	t->img = mlx_new_image(t->mlx, HEIGHT, WIDTH);
@@ -81,13 +85,13 @@ int		ft_fractol(t_s *t)
 	t->win = mlx_new_window(t->mlx, HEIGHT, WIDTH, "Fractol");
 	mlx_hook(t->win, 2, 1L << 0, ft_key, t);
 	mlx_hook(t->win, 17, 1L << 17, ft_quit, t);
-	mlx_hook(t->win, 6, 1L < 6, ft_mouse, t);
-	mlx_mouse_hook(data->win, mouse_hook, data);
+//	mlx_hook(t->win, 6, 1L < 6, ft_mouse, t);
+//	mlx_mouse_hook(t->win, ft_mouse, t);
 	mlx_loop_hook(t->mlx, ft_fractol2, t);
 	mlx_loop(t->mlx);
 	return (0);
-}*/
-void	ft_init_win(t_s *t)
+}
+/*void	ft_init_win(t_s *t)
 {	
 	t->mlx = mlx_init();
 	t->win = mlx_new_window(t->mlx, HEIGHT, WIDTH, "Fractol");
@@ -109,15 +113,13 @@ int		ft_fractol(t_s *t)
 	mlx_loop(t->mlx);
 //	mlx_destroy_image(t->mlx, t->img);
 	return (0);
-}
+}*/
 
 int		main(int ac, char **av)
 {
 	(void)ac;
 	ft_putstr("totoro\n");
 	t_s t;
-	t.o = 0;
-	t.v = 0;
 	t.cdt_r = 0;
 	t.cdt_i = 0;
 //	ft_bzero((void)t, sizeof(t));
@@ -131,7 +133,7 @@ int		main(int ac, char **av)
 	}
 	else
 	{
-		ft_change_fract(&t, 1);
+//		ft_change_fract(&t, 1);
 		ft_fractol(&t);
 	}
 	ft_putstr("totoro\n");

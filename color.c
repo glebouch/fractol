@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h" 
+#include "fractol.h"
 
 void	ft_get_color(t_s *t, int x, int y, int i)
 {

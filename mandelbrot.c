@@ -35,7 +35,7 @@ void	mandelbrot_calc(t_s *t, int x, int y)
 		i++;
 	}
 	ft_get_color(t, x, y, i);
-	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
+//	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
 }
 
 void	ft_mandelbrot(t_s *t)
