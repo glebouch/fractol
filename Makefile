@@ -24,7 +24,7 @@ LIB = -L ./libft/ -lft -lmlx
 
 INCLUDES = -I includes -I libft
 
-FLAGS = -Wall -Wextra -Werror -O1
+FLAGS = -Wall -Wextra -Werror -O1 -g
 
 all : mlib $(NAME)
 
@@ -33,7 +33,7 @@ mlib :
 
 
 $(NAME) : $(OBJ)
-	$(CC) -o $(NAME) $^ $(LIB) -lX11 -lXext -O1
+	$(CC) -o $(NAME) $^ $(LIB) -lX11 -lXext -O1 -g
 
 #$(NAME) : $(OBJ)
 #	$(CC) $(LIB) $^ -o $@ -lX11 -lXext

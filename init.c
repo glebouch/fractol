@@ -12,6 +12,14 @@
 
 #include "fractol.h"
 
+/*int		ft_mouse(int x, int y, t_s *t)
+{
+	t->cdt_r = (x - WIDTH/2) / (WIDTH/2);
+	t->cdt_i = (y - WIDTH/2) / (WIDTH/2);
+	ft_julia(t);
+	return (0);
+}
+
 void	ft_init_julia(t_s *t)
 {
 //	ft_putstr("coucou ici ft_init_julia\n");
@@ -52,14 +60,70 @@ void	ft_julia(t_s *t)
 		x = 0;
 		while (x < WIDTH)
 		{
-			t->newR = 1.5 * (x - HEIGHT / 2) / (0.5 * t->zoom_j * WIDTH) + t->o;
-			t->newI = (y - WIDTH / 2) / (0.5 * t->zoom_j * WIDTH) + t->v;
+			t->newR = 1.5 * (x - HEIGHT / 2) / (0.5 * t->zoom * WIDTH) + t->o;
+			t->newI = (y - WIDTH / 2) / (0.5 * t->zoom * WIDTH) + t->v;
 			ft_get_color(t, x, y, ft_calcul_julia(t));
 			x++;
 		}
 		y++;
 	}
+}*/
+
+int		ft_mouse(t_s *t, int x, int y)
+{
+	if (t->fract == 1)
+	{
+		t->cdt_r = x * 2;
+		t->cdt_i = y * 2 - 800;
+		printf("%lf %lf\n", t->cdt_i, t->cdt_r);
+		ft_julia(t);
+	}
+	return (0);
 }
+
+void	ft_init_julia(t_s *t)
+{
+//	t->cdt_r = 0.285;
+//	t->cdt_i = 0.01;
+	ft_julia(t);
+}
+
+void	ft_calcul_julia(int x, int y, t_s *t)
+{
+	double x1 = -2.0;
+	double y1 = -1.9;
+	int i = 0;
+
+	t->z_r = x / t->zoom + x1 + t->o;
+	t->z_i = y / t->zoom + y1 + t->v;
+	while (t->z_r * t->z_r + t->z_i * t->z_i < 4 && i < ITMAX)
+	{
+		t->tmp = t->z_r;
+		t->z_r = t->z_r * t->z_r - t->z_i * t->z_i - 0.8 + (t->cdt_r / WIDTH);
+		t->z_i = 2 * t->z_i * t->tmp + t->cdt_i / WIDTH;
+		i++;
+	}
+	ft_get_color(t, x, y, i);
+	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
+}
+
+void	ft_julia(t_s *t)
+{
+	int x = 0;
+	int y;
+
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			ft_calcul_julia(x, y, t);
+			y++;
+		}
+		x++;
+	}
+}
+
 
 int ft_compare_title(char *str)
 {

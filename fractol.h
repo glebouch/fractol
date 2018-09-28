@@ -33,7 +33,7 @@
 
 # define HEIGHT 800
 # define WIDTH 800
-# define ITMAX 155
+# define ITMAX 50
 # define EXIT 65307
 # define KEYUP 65362
 # define KEYDOWN 65364
@@ -55,12 +55,6 @@
 
 
 # define KC keycode
-
-typedef struct	s_complex
-{
-	int			x;
-	int			y;
-}				t_complex;
 
 typedef struct	s_s
 {
@@ -88,11 +82,10 @@ typedef struct	s_s
 	double		c_r;
 	double		c_i;
 	double		tmp;
-	double		zoom_j;
-	double		zoom_m;
+	double		var_zoom;
+	double		zoom;
 	double		deep;
 	int			fract;
-	t_complex	complex;
 }				t_s;
 
 int				ft_quit(t_s *t);
@@ -102,5 +95,6 @@ int				ft_compare_title(char *str);
 void			ft_julia(t_s *t);
 void			ft_init_mandelbrot(t_s *t);
 void			ft_mandelbrot(t_s *t);
+int				ft_mouse(t_s *t, int x, int y);
 
 #endif
