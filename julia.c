@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glebouch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,16 +21,18 @@ void	ft_init_julia(t_s *t)
 	t->zoom = 200;
 	t->cdt_r = 0;
 	t->cdt_i = 0;
-	t->it = 150;
+	t->it = 90;
 }
 
 void	ft_calcul_julia(int x, int y, t_s *t)
 {
-//	ft_putstr("c'est calcul_julia\n");
-	double x1 = -2.0;
-	double y1 = -1.9;
-	int i = 0;
+	double	x1;
+	double	y1;
+	int		i;
 
+	x1 = -2.0;
+	y1 = -1.9;
+	i = 0;
 	t->z_r = x / t->zoom + x1 + t->o;
 	t->z_i = y / t->zoom + y1 + t->v;
 	while (t->z_r * t->z_r + t->z_i * t->z_i < 4 && i < t->it)
@@ -38,20 +40,17 @@ void	ft_calcul_julia(int x, int y, t_s *t)
 		t->tmp = t->z_r;
 		t->z_r = t->z_r * t->z_r - t->z_i * t->z_i + t->cdt_r;
 		t->z_i = 2 * t->z_i * t->tmp + t->cdt_i;
-
 		i++;
 	}
 	ft_get_color(t, x, y, i);
-//	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
 }
 
 void	ft_julia(t_s *t)
 {
-//	ft_putstr("on est dans ft_julia\n");
-//	printf("cdtr et i = %lf %lf", t->cdt_r, t->cdt_i);
-	int x = 0;
-	int y;
+	int	x;
+	int	y;
 
+	x = 0;
 	while (x < WIDTH)
 	{
 		y = 0;
@@ -62,5 +61,4 @@ void	ft_julia(t_s *t)
 		}
 		x++;
 	}
-
 }

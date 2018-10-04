@@ -12,7 +12,6 @@
 
 #include "fractol.h"
 
-
 int		ft_key(int keycode, t_s *t)
 {
 	if (KC == EXIT)
@@ -20,39 +19,22 @@ int		ft_key(int keycode, t_s *t)
 	if (KC == KEYR)
 		t->radius = (t->radius == 0) ? 1 : 0;
 	if (KC == KEYUP || KC == KEYDOWN)
-		t->v = (KC == KEYUP) ? t->v + 10/t->zoom : t->v - 10/t->zoom;
+		t->v = (KC == KEYUP) ? t->v + 10 / t->zoom : t->v - 10 / t->zoom;
 	if (KC == KEYLEFT || KC == KEYRIGHT)
-		t->o = (KC == KEYLEFT) ? t->o - 10/t->zoom : t->o + 10/t->zoom;
+		t->o = (KC == KEYLEFT) ? t->o - 10 / t->zoom : t->o + 10 / t->zoom;
 	if (KC == KEYMINUS && t->zoom > 0)
-//		t->zoom = t->zoom * 0.9;
 		ft_zoom(t, 0.9, -1);
 	if (KC == KEYPLUS)
-//		t->zoom = t->zoom * 1.1;
 		ft_zoom(t, 1.1, 1);
 	if (KC == KEYJ || KC == KEYM || KC == KEYB)
 		ft_change_fract(t, KC, 1);
 	if (KC == KEYLESSDEEP || KC == KEYDEEPER)
 		t->it += (KC == KEYLESSDEEP) ? -3 : 3;
-//	if (KC == R || KC == V || KC == B)
-//	{
-//		if (KC == R)
-//			t->gamme = 'r';
-//		else if (KC == V)
-//			t->gamme = 'v';
-//		else
-//			t->gamme = 'b';
-//	}
-	printf("%d\n", KC);
-//	printf("%f %lf\n", t->d/t->zoom, 0.1 * (double)t->x / t->zoom);
-//	printf("%f\n", t->zoom);
-//	printf("v = %lf\n", t->v);
 	return (0);
 }
 
-
-int	ft_mouse_button(int button, int x, int y, t_s *t)
+int		ft_mouse_button(int button, int x, int y, t_s *t)
 {
-//	printf("button = %d, zoom = %lf\n", button, t->zoom);
 	t->x = x;
 	t->y = y;
 	if (button == 4)
@@ -66,19 +48,13 @@ int	ft_mouse_button(int button, int x, int y, t_s *t)
 
 int		ft_mouse(int x, int y, t_s *t)
 {
-//	printf("x = %d y = %d\n", x, y);
-//	ft_putstr("passe par mouse\n");
 	t->x = x;
 	t->y = y;
-	if (t->fract == 1 && t->radius == 1 && (x >= 0 && x < WIDTH && y >= 0 && y < WIDTH))
+	if (t->fract == 1 && t->radius == 1 &&
+		(x >= 0 && x < WIDTH && y >= 0 && y < WIDTH))
 	{
 		t->cdt_r = (double)(x - 400) / (400);
 		t->cdt_i = (double)(y - 400) / (400);
-//		printf("%d, %d\n", x, y);
-//		printf("%lf, %lf\n", t->cdt_r, t->cdt_i);
 	}
-//	ft_putstr("passe par mouse 2\n");
-//	ft_julia(t);
-//	ft_putstr("passe par mouse 3\n");
 	return (0);
 }
