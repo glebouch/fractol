@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glebouch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,38 +12,43 @@
 
 #include "fractol.h"
 
-void	ft_init_mandelbrot(t_s *t)
+void	ft_init_julia(t_s *t)
 {
 	t->o = 0;
 	t->v = 0;
-	t->cdt_r = -2.05;
-	t->cdt_i = -1.3;
-	t->fract = 2;
-	t->zoom = 300;
+	t->radius = 0;
+	t->fract = 1;
+	t->zoom = 200;
+	t->cdt_r = 0;
+	t->cdt_i = 0;
 	t->it = 150;
 }
 
-void	mandelbrot_calc(t_s *t, int x, int y)
+void	ft_calcul_julia(int x, int y, t_s *t)
 {
+//	ft_putstr("c'est calcul_julia\n");
+	double x1 = -2.0;
+	double y1 = -1.9;
 	int i = 0;
-	
-	t->c_r = x / t->zoom + t->cdt_r + t->o;
-	t->c_i = y / t->zoom + t->cdt_i + t->v;
-	t->z_r = 0;
-	t->z_i = 0;
+
+	t->z_r = x / t->zoom + x1 + t->o;
+	t->z_i = y / t->zoom + y1 + t->v;
 	while (t->z_r * t->z_r + t->z_i * t->z_i < 4 && i < t->it)
 	{
 		t->tmp = t->z_r;
-		t->z_r = t->z_r * t->z_r - t->z_i * t->z_i + t->c_r;
-		t->z_i = 2 * t->z_i * t->tmp + t->c_i;
+		t->z_r = t->z_r * t->z_r - t->z_i * t->z_i + t->cdt_r;
+		t->z_i = 2 * t->z_i * t->tmp + t->cdt_i;
+
 		i++;
 	}
 	ft_get_color(t, x, y, i);
 //	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
 }
 
-void	ft_mandelbrot(t_s *t)
+void	ft_julia(t_s *t)
 {
+//	ft_putstr("on est dans ft_julia\n");
+//	printf("cdtr et i = %lf %lf", t->cdt_r, t->cdt_i);
 	int x = 0;
 	int y;
 
@@ -52,9 +57,10 @@ void	ft_mandelbrot(t_s *t)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			mandelbrot_calc(t, x, y);
+			ft_calcul_julia(x, y, t);
 			y++;
 		}
 		x++;
 	}
+
 }

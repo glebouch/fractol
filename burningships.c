@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burningships.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glebouch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,18 @@
 
 #include "fractol.h"
 
-void	ft_init_mandelbrot(t_s *t)
-{
+void	ft_init_burningships(t_s *t)
+{	
 	t->o = 0;
-	t->v = 0;
+	t->v = -0.53;
 	t->cdt_r = -2.05;
 	t->cdt_i = -1.3;
-	t->fract = 2;
-	t->zoom = 300;
+	t->fract = 3;
+	t->zoom = 220;
 	t->it = 150;
 }
 
-void	mandelbrot_calc(t_s *t, int x, int y)
+void	burningships_calc(t_s *t, int x, int y)
 {
 	int i = 0;
 	
@@ -35,24 +35,24 @@ void	mandelbrot_calc(t_s *t, int x, int y)
 	{
 		t->tmp = t->z_r;
 		t->z_r = t->z_r * t->z_r - t->z_i * t->z_i + t->c_r;
-		t->z_i = 2 * t->z_i * t->tmp + t->c_i;
+		t->z_i = fabs(2 * t->z_i * t->tmp) + t->c_i;
 		i++;
 	}
 	ft_get_color(t, x, y, i);
 //	mlx_put_image_to_window(t->mlx, t->win, t->img, 0, 0);
 }
 
-void	ft_mandelbrot(t_s *t)
+void	ft_burningships(t_s *t)
 {
 	int x = 0;
-	int y;
+	int y = 0;
 
 	while (x < WIDTH)
 	{
 		y = 0;
 		while (y < HEIGHT)
 		{
-			mandelbrot_calc(t, x, y);
+			burningships_calc(t, x, y);
 			y++;
 		}
 		x++;
