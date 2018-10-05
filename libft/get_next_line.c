@@ -6,12 +6,11 @@
 /*   By: glebouch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 13:39:08 by glebouch          #+#    #+#             */
-/*   Updated: 2018/01/09 17:12:09 by glebouch         ###   ########.fr       */
+/*   Updated: 2018/03/12 14:07:09 by glebouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char			*ft_strcjoin(char *line, char *buffer, char c)
 {
@@ -19,10 +18,12 @@ char			*ft_strcjoin(char *line, char *buffer, char c)
 	int		j;
 	char	*new;
 
-	i = 0;
 	j = 0;
-	if (!(new = (char *)malloc(ft_strlen(line) + ft_strlen(buffer) + 1)))
+	i = ft_strchr(buffer, '\n') ?
+		ft_strchr(buffer, '\n') - buffer : ft_strlen(buffer);
+	if (!(new = (char *)malloc(ft_strlen(line) + i + 1)))
 		return (NULL);
+	i = 0;
 	while (line && line[i])
 	{
 		new[i] = line[i];
@@ -46,13 +47,11 @@ static int		ft_taboulet(char **stat, char **line)
 	if (*stat && *stat[0])
 	{
 		*line = ft_strcjoin(*line, *stat, '\n');
-		*stat = ft_strdup(ft_strchr(tmp, '\n') == NULL ?\
-			NULL : ft_strchr(tmp, '\n') + 1);
-		free(tmp);
+		*stat = ft_strchr(tmp, '\n') ?
+			ft_strdup(ft_strchr(tmp, '\n') + 1) : NULL;
+		ft_strdel(&tmp);
 		if (*stat)
 			return (1);
-		//ft_strdel(stat);
-		free(stat);
 	}
 	return (0);
 }
@@ -61,13 +60,8 @@ int				get_next_line(int fd, char **line)
 {
 	int			i;
 	char		buffer[BUFF_SIZE + 1];
-	static char	*stat;
+	static char	*stat = NULL;
 
-	if (fd == 0 && !line)
-	{
-		free(stat);
-		return (-1);
-	}
 	if (fd < 0 || !line)
 		return (-1);
 	*line = NULL;
@@ -79,12 +73,12 @@ int				get_next_line(int fd, char **line)
 		if (ft_strchr(buffer, '\n'))
 		{
 			*line = ft_strcjoin(*line, buffer, '\n');
-			if (stat)
-				free(stat);
 			stat = ft_strdup(ft_strchr(buffer, '\n') + 1);
 			return (1);
 		}
 		*line = ft_strcjoin(*line, buffer, '\n');
 	}
+	if (!(*line))
+		ft_strdel(&stat);
 	return (*line ? 1 : i);
 }

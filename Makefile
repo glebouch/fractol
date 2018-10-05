@@ -12,19 +12,22 @@
 
 NAME = fractol
 
-#SRC = main.c get_next_line.c parallele.c parcing.c traitement_couleur.c parallele2.c isometrique.c
-#SRC = main.c get_next_line.c argparallele.c parcing.c traitement_couleur.c isometrique.c
-SRC = main.c color.c init.c mandelbrot.c
+SRC = main.c tools.c julia.c mandelbrot.c burningships.c hook.c
 
 OBJ = $(SRC:.c=.o)
 
-CC = clang
+CC = gcc
 
-LIB = -L ./libft/ -lft -lmlx
+LIB = -L ./libft/ -lft -lm -L ./minilibX/ -lmlx
 
-INCLUDES = -I includes -I libft
+INCLUDES = -I fractol.h -I libft/libft.h
 
-FLAGS = -Wall -Wextra -Werror -O1 -g
+CFLAGS = -Wall -Wextra -Werror -O1 -g
+
+#pour mac
+FLAGS = -framework OpenGL -framework AppKit
+#pour pc :
+#FLAGS= -lX11 -lXext -O1 -g
 
 all : mlib $(NAME)
 
@@ -33,13 +36,10 @@ mlib :
 
 
 $(NAME) : $(OBJ)
-	$(CC) -o $(NAME) $^ $(LIB) -lX11 -lXext -O1 -g
-
-#$(NAME) : $(OBJ)
-#	$(CC) $(LIB) $^ -o $@ -lX11 -lXext
+	$(CC) $(CFLAGS) $(FLAGS) $(LIB) $^ -o $(NAME)
 
 %.o : %.c
-	$(CC) $(FLAGS) -c $< $(INCLUDES) -o $@
+	$(CC) $(CFLAGS) -c $< $(INCLUDES) -o $@
 
 clean :
 	@make -C ./libft/ clean

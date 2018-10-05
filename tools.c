@@ -20,7 +20,7 @@ void	ft_init_color_table(t_s *t)
 	t->color_table = (int*)malloc(sizeof(int) * t->it);
 	while (i < t->it)
 	{
-		t->color_table[i] = rand() % 0xFFFF + 1;
+		t->color_table[i] = rand() % 0x00FFFFFF + 1;
 		i++;
 	}
 }

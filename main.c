@@ -60,7 +60,6 @@ int		main(int ac, char **av)
 
 	t.color_table = NULL;
 	t.it = 150;
-
 	srand(time(NULL));
 	ft_bzero((void *)&t, sizeof(t));
 	if (ac != 2 || (t.fract = ft_compare_title(av[1])) == 0)
