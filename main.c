@@ -42,6 +42,7 @@ int		ft_fractol2(t_s *t)
 
 int		ft_fractol(t_s *t)
 {
+	ft_print_usage();
 	ft_change_fract(t, 1, 0);
 	t->mlx = mlx_init();
 	t->win = mlx_new_window(t->mlx, HEIGHT, WIDTH, "Fractol");
@@ -58,10 +59,10 @@ int		main(int ac, char **av)
 {
 	t_s t;
 
-	t.color_table = NULL;
-	t.it = 150;
 	srand(time(NULL));
 	ft_bzero((void *)&t, sizeof(t));
+	t.color = 1;
+	t.it = 150;
 	if (ac != 2 || (t.fract = ft_compare_title(av[1])) == 0)
 	{
 		ft_putstr("Usage: ./fractol <fractal>\n \
@@ -70,6 +71,5 @@ Fractals :\n\tjulia\n\tmandelbrot\n\tburningship\n");
 	}
 	else
 		ft_fractol(&t);
-	ft_putstr("totoro\n");
 	return (0);
 }

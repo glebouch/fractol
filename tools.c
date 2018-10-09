@@ -59,8 +59,20 @@ int		ft_compare_title(char *str)
 
 void	ft_get_color(t_s *t, int x, int y, int i)
 {
-	if (i == t->it)
-		*(int *)&(t->ch[y * t->s_line + (t->bpp / 8) * x]) = 0;
-	else
-		*(int *)&(t->ch[y * t->s_line + (t->bpp / 8) * x]) = t->color_table[i];
+	if (t->color == 0)
+	{
+		if (i == t->it)
+			*(int *)&(t->ch[y * t->s_line + (t->bpp / 8) * x]) = 0;
+		else
+			*(int *)&(t->ch[y * t->s_line + (t->bpp / 8) * x]) =\
+					t->color_table[i];
+	}
+	if (t->color == 1)
+	{
+		if (i == t->it)
+			*(int *)&(t->ch[y * t->s_line + (t->bpp / 8) * x]) = 0;
+		else
+			*(int *)&(t->ch[y * t->s_line + (t->bpp / 8) * x]) =\
+					(i * 255) / t->it;
+	}
 }

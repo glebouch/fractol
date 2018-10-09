@@ -31,15 +31,13 @@
 # define KEYRIGHT 124
 # define KEYMINUS 78
 # define KEYPLUS 69
-# define KEYDEEPER 24
-# define KEYLESSDEEP 27
-# define KEYI 34
-# define KEYP 35
-# define KEYO 31
+# define KEYDEEPER 30
+# define KEYLESSDEEP 33
 # define KEYJ 38
 # define KEYM 46
 # define KEYB 11
 # define KEYR 15
+# define KEYC 8
 
 /*
 ** # define HEIGHT 800
@@ -53,13 +51,11 @@
 ** # define KEYPLUS 65451
 ** # define KEYLESSDEEP 45
 ** # define KEYDEEPER 61
-** # define KEYI 105
-** # define KEYP 112
-** # define KEYO 111
 ** # define KEYJ 106
 ** # define KEYM 109
 ** # define KEYB 98
 ** # define KEYR 114
+** # define KEYC 114
 */
 
 # define KC keycode
@@ -70,8 +66,6 @@ typedef struct	s_s
 	void		*win;
 	void		*img;
 	int			color;
-	int			gamme;
-	int			proj;
 	int			bpp;
 	int			s_line;
 	int			endian;
@@ -95,6 +89,7 @@ typedef struct	s_s
 }				t_s;
 
 int				ft_compare_title(char *str);
+int				ft_print_usage(void);
 void			ft_change_fract(t_s *t, int keycode, int i);
 void			ft_init(t_s *t);
 int				ft_quit(t_s *t);

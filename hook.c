@@ -30,6 +30,8 @@ int		ft_key(int keycode, t_s *t)
 		ft_change_fract(t, KC, 1);
 	if (KC == KEYLESSDEEP || KC == KEYDEEPER)
 		t->it += (KC == KEYLESSDEEP) ? -3 : 3;
+	if (KC == KEYC)
+		t->color = (t->color == 0) ? 1 : 0;
 	return (0);
 }
 
@@ -56,5 +58,17 @@ int		ft_mouse(int x, int y, t_s *t)
 		t->cdt_r = (double)(x - 400) / (400);
 		t->cdt_i = (double)(y - 400) / (400);
 	}
+	return (0);
+}
+
+int		ft_print_usage(void)
+{
+	ft_putstr("Change the type of fractal with J, M or B key\n\
+Increase or decrease iteration max with [ and ] key\n\
+Change colors with C key\n\
+Unlock and lock the mouse changes with R key or left click\n\
+Zoom in and out with - and + key or the mouse wheel\n\
+Move with keyboard arrows\n\
+Quit with esc\n");
 	return (0);
 }

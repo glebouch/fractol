@@ -19,8 +19,8 @@ void	ft_init_julia(t_s *t)
 	t->radius = 0;
 	t->fract = 1;
 	t->zoom = 200;
-	t->cdt_r = 0;
-	t->cdt_i = 0;
+	t->cdt_r = 0.285;
+	t->cdt_i = 0.01;
 	t->it = 90;
 }
 
